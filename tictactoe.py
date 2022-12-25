@@ -52,9 +52,41 @@ class Tictactoe:
                 return        
 
     def check_win(self, current_mark):
-        bdlen = len(self.gameBoard)
-        
-     
+
+        for row in range(3):
+            Haswon = True
+            for col in range(3):
+                if self.gameBoard[row][col] != current_mark:
+                    Haswon = False
+                    break
+            if Haswon:
+                return Haswon
+
+        for row in range(3):
+            Haswon = True
+            for col in range(3):
+                if self.gameBoard[col][row] != current_mark:
+                    Haswon = False
+                    break
+            if Haswon:
+                return Haswon
+
+        Haswon = True
+        for diagL in range(3):
+            if self.gameBoard[diagL][diagL] != current_mark:
+                Haswon = False
+                break
+        if Haswon:
+            return Haswon
+
+        Haswon = True
+        for diagR in range(3):
+            if self.gameBoard[diagR][2 - diagR] != current_mark:
+                Haswon = False
+                break
+        if Haswon:
+            return Haswon
+        return False  
 
     def check_full(self):
         for row in self.gameBoard:
@@ -83,6 +115,7 @@ class Tictactoe:
 
             if self.check_win(current_mark):
                 print(f"Congratulations! {current_mark} has won!")
+                self.print_bd()
                 break
 
             if self.check_full():
