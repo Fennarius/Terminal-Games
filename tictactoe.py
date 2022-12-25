@@ -33,7 +33,36 @@ class Tictactoe:
                 else:
                     print(item, end=" | ")
                 x += 1
-            print("\n|---|---|---|")            
+            print("\n|---|---|---|")   
+
+    def isMarked(self, row, col):
+        if self.gameBoard[int(row)-1][int(col)-1] == '_':
+            print("trace")
+            return False
+        else:
+            return True
+
+
+    def tick_Box(self, current_mark):
+        row, col = input("Enter the row and column you wish to mark: ").split()
+        while True:
+            if self.isMarked(row, col) == True:
+                row, col = input("Oops already marked, try again: ").split()
+            else:
+                self.gameBoard[int(row)-1][int(col)-1] = current_mark
+                return        
+
+    def check_win(self, current_mark):
+        pass
+
+    def check_full(self):
+        pass
+
+    def flip(self, current_mark):
+        if current_mark == 'X':
+            return 'O'
+        else:
+            return 'X'
 
     def play_game(self):
         self.makeBoard()
@@ -44,7 +73,14 @@ class Tictactoe:
             print(f"Current Player's Mark: {current_mark}")
             
             self.print_bd()
-            break
+
+            self.tick_Box(current_mark)
+
+            self.check_win(current_mark)
+
+            self.check_full()
+            
+            current_mark = self.flip(current_mark)
 
 
 game = Tictactoe()
