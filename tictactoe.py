@@ -33,11 +33,10 @@ class Tictactoe:
                 else:
                     print(item, end=" | ")
                 x += 1
-            print("\n|---|---|---|")   
+            print("\n|---+---+---|")   
 
     def isMarked(self, row, col):
         if self.gameBoard[int(row)-1][int(col)-1] == '_':
-            print("trace")
             return False
         else:
             return True
@@ -53,10 +52,16 @@ class Tictactoe:
                 return        
 
     def check_win(self, current_mark):
-        pass
+        bdlen = len(self.gameBoard)
+        
+     
 
     def check_full(self):
-        pass
+        for row in self.gameBoard:
+            for mark in row:
+                if mark == '_':
+                    return False
+        return True
 
     def flip(self, current_mark):
         if current_mark == 'X':
@@ -76,9 +81,13 @@ class Tictactoe:
 
             self.tick_Box(current_mark)
 
-            self.check_win(current_mark)
+            if self.check_win(current_mark):
+                print(f"Congratulations! {current_mark} has won!")
+                break
 
-            self.check_full()
+            if self.check_full():
+                print("No winners. Board full")
+                break
             
             current_mark = self.flip(current_mark)
 
